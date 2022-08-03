@@ -6,6 +6,7 @@
 // console.log(typeof joinData);
 
 // var myName = "ahmed";
+// console.log(myName);
 // var splitData = myName.split("");
 // console.log(splitData);
 

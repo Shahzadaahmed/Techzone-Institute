@@ -4,7 +4,7 @@ var password = document.getElementById("password");
 // Note: Fetching data from LS DB...!
 var fetchData = localStorage.getItem("User");
 var dataInJSON = JSON.parse(fetchData);
-// console.log(dataInJSON);
+console.log("Data In JSON: ", dataInJSON);
 
 
 function clearAll() {

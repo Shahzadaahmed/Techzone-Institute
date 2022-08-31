@@ -107,3 +107,35 @@
 
 
 
+// Note: Solve the equation: a2 - (2ab) + b2
+
+
+
+
+// function handleSquareValue(num) {
+//     return num * num;
+// };
+
+// function solveEquation(a, b, squareHandler) {
+//     var equation = squareHandler(a) - (2 * a * b) + squareHandler(b);
+//     return equation
+// }
+
+// var result = solveEquation(4, 2, handleSquareValue);
+// console.log(result);
+
+// // (a + b + c)2 = a2 + b2 + c2 +2ab+2bc +2ca
+
+// Note: Solve the equation: a2 - (2ab) + b2
+
+function squareValue(num) {
+    return num * num;
+};
+
+function solveEquation(a, b, squareHandler) {
+    var equation = squareHandler(a) - (2 * a * b) + squareHandler(b);
+    return equation;
+};
+
+var result = solveEquation(4, 2, squareValue);
+console.log(result);

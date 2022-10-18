@@ -1,10 +1,6 @@
 import React from 'react';
-// import FourthClass from './class-topic/fourth-class';
-// import ThirdClass from './class-topic/third-class';
-// import FifthClass from './class-topic/FifthClass'Bulb
-// import Bulb from './class-topic/Bulb';
-import Form from './class-topic/Form';
+import AppRoures from './components/routes/routes';
 
-const App = () => <Form />
+const App = () => <AppRoures />
 
 export default App;

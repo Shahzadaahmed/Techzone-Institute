@@ -1,12 +1,15 @@
 // Note: Navigation component...!
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Nav, NavItem, NavLink } from 'reactstrap';
 
 const Navigation = (props) => {
-    // console.log("Props of navigation: ", props);
+    console.log("Props of navigation: ", props);
     let { userStatus } = props;
+
+    // Note: Handeling states here...!
+    const [user, setUser] = useState(null);
 
     // Note: Function to logout user...!
     const logOut = () => {
@@ -15,6 +18,35 @@ const Navigation = (props) => {
         console.log('You have logged out successfully!');
         window.location.reload();
     };
+
+    // Note This hook will work on every update of userStatus state...!
+    useEffect(() => {
+        let userFound = false;
+        let targetUser;
+
+        let fetchUsers = localStorage.getItem("Users");
+        fetchUsers = JSON.parse(fetchUsers);
+        // console.log(fetchUsers);
+
+        if (fetchUsers) {
+            for (let i = 0; i < fetchUsers.length; i++) {
+                // console.log(fetchUsers[i]);
+
+                if (props.userStatus.email == fetchUsers[i].email) {
+                    userFound = true;
+                    targetUser = fetchUsers[i];
+                    break;
+                };
+            };
+
+            if (targetUser) {
+                console.log(targetUser);
+                setUser(targetUser);
+            }
+        };
+    }, [userStatus != null]);
+
+    // userStatus.email.slice(0, userStatus.email.lastIndexOf("@")).toUpperCase()
 
     return (
         <>
@@ -27,7 +59,7 @@ const Navigation = (props) => {
                                 {
                                     (userStatus)
                                         ?
-                                        (userStatus.email.slice(0, userStatus.email.lastIndexOf("@")).toUpperCase())
+                                        (user ? user.name : null)
                                         :
                                         (null)
                                 }

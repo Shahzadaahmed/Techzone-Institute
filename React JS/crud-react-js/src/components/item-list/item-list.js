@@ -14,6 +14,19 @@ const ItemList = () => {
         if (dataInJSON) setDataList(dataInJSON);
     }, []);
 
+    // Note: Delete handler...!
+    const deleteHandler = (data, key) => {
+        console.log(data, key);
+
+        let itemListClone = dataList.slice(0);
+        itemListClone.splice(key, 1);
+        setDataList(itemListClone);
+
+        // Note: Saving data in DB LS...!
+        let dataInStr = JSON.stringify(itemListClone);
+        localStorage.setItem("ElectronicItemsList", dataInStr);
+    };
+
     return (
         <>
             <h1> Items List Screen! </h1>
@@ -25,7 +38,12 @@ const ItemList = () => {
                         dataList.map((item, index) => {
                             return (
                                 <div key={index}>
-                                    <h3> {`${index + 1} ${item.itemName}`} </h3>
+                                    <span> {`${index + 1} ${item.itemName}`} </span>
+                                    <button
+                                        className='btn btn-secondary m-2'
+                                        // onClick={deleteHandler}
+                                        onClick={() => deleteHandler(item, index)}
+                                    > Delete </button>
                                 </div>
                             );
                         })

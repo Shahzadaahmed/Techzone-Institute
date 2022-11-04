@@ -32,7 +32,7 @@ const Navigation = (props) => {
             for (let i = 0; i < fetchUsers.length; i++) {
                 // console.log(fetchUsers[i]);
 
-                if (props.userStatus.email == fetchUsers[i].email) {
+                if (props?.userStatus?.email == fetchUsers[i].email) {
                     userFound = true;
                     targetUser = fetchUsers[i];
                     break;

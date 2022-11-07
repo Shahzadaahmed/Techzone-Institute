@@ -17,7 +17,7 @@ const AppRoures = () => {
     return (
         <>
             <Router>
-            {/* <Navigation /> */}
+            <Navigation />
 
                 <Routes>
                     <Route path='/' element={<Home />} />

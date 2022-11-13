@@ -1,11 +1,15 @@
 // Note: ItemList component...!
 
 import React, { useEffect, useState } from 'react';
+import EditModal from "../model/modal";
 
 const ItemList = () => {
 
     // Note: Handeling states here...!
     const [dataList, setDataList] = useState([]);
+    const [modalVisibility, setModalVisibility] = useState(false);
+    const [editData, setEditData] = useState(null);
+    const [updateValue, setUpdateValue] = useState("");
 
     // Note: Mounted Hook...!
     useEffect(() => {
@@ -27,9 +31,82 @@ const ItemList = () => {
         localStorage.setItem("ElectronicItemsList", dataInStr);
     };
 
+    // Note: Edit handler...!
+    const editHandler = (data, key) => {
+        console.log(key, data);
+        setModalVisibility(true);
+
+        let obj = {
+            key,
+            data
+        };
+        setEditData(obj);
+        setUpdateValue(data.itemName);
+    };
+
+    // Note: Cancel handler...!
+    const cancelHandler = () => {
+        setModalVisibility(false);
+        setEditData(null);
+        setUpdateValue("");
+    };
+
+    // NOte: Update handler...!
+    const updateHandler = () => {
+        // console.log(editData);
+        // console.log(updateValue);
+
+        let uid = editData.data.userId;
+        // console.log("User Id: ", uid);
+
+        let update_Data = {
+            itemName: updateValue,
+            timeStamp: new Date().toLocaleTimeString(),
+            userId: uid
+        };
+
+        // console.log(update_Data);
+
+        let dataListClone = dataList.slice(0);
+        // console.log(dataListClone);
+        dataListClone.splice( editData.key , 1 , update_Data );
+        setDataList(dataListClone);
+
+        setEditData(null);
+        setModalVisibility(false);
+        setUpdateValue("");
+    };
+
     return (
         <>
+
             <h1> Items List Screen! </h1>
+
+            {/* Note: EditModal component */}
+            {
+                (modalVisibility)
+                    ?
+                    (
+                        <div className='edit-container'>
+                            <h3> Edit Section </h3>
+                            <input
+                                type={'text'}
+                                placeholder="Edit Value"
+                                value={updateValue}
+                                onChange={(e) => setUpdateValue(e.target.value)}
+                            />
+                            <button onClick={updateHandler}>
+                                Update
+                            </button>
+
+                            <button onClick={cancelHandler}>
+                                Cancel
+                            </button>
+                        </div>
+                    )
+                    :
+                    (null)
+            }
 
             {
                 (dataList && dataList.length > 0)
@@ -41,9 +118,15 @@ const ItemList = () => {
                                     <span> {`${index + 1} ${item.itemName}`} </span>
                                     <button
                                         className='btn btn-secondary m-2'
-                                        // onClick={deleteHandler}
+                                        style={{ zIndex: 9999 }}
                                         onClick={() => deleteHandler(item, index)}
                                     > Delete </button>
+
+                                    <button
+                                        className='btn btn-primary m-2'
+                                        style={{ zIndex: 999999 }}
+                                        onClick={() => editHandler(item, index)}
+                                    > Edit </button>
                                 </div>
                             );
                         })

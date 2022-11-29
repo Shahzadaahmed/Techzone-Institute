@@ -10,12 +10,17 @@ const ItemList = () => {
     const [modalVisibility, setModalVisibility] = useState(false);
     const [editData, setEditData] = useState(null);
     const [updateValue, setUpdateValue] = useState("");
+    const [authorizedUser, setAuthorizedUser] = useState(null);
 
     // Note: Mounted Hook...!
     useEffect(() => {
         let fetchItemsData = localStorage.getItem("ElectronicItemsList")
         let dataInJSON = JSON.parse(fetchItemsData);
         if (dataInJSON) setDataList(dataInJSON);
+
+        let fetchUser = localStorage.getItem("AuthenticatedUser");
+        fetchUser = JSON.parse(fetchUser);
+        if (fetchUser) setAuthorizedUser(fetchUser);
     }, []);
 
     // Note: Delete handler...!
@@ -51,7 +56,7 @@ const ItemList = () => {
         setUpdateValue("");
     };
 
-    // NOte: Update handler...!
+    // Note: Update handler...!
     const updateHandler = () => {
         // console.log(editData);
         // console.log(updateValue);
@@ -69,8 +74,12 @@ const ItemList = () => {
 
         let dataListClone = dataList.slice(0);
         // console.log(dataListClone);
-        dataListClone.splice( editData.key , 1 , update_Data );
+        dataListClone.splice(editData.key, 1, update_Data);
         setDataList(dataListClone);
+
+        // Note: Saving data in DB...!
+        let dataInStr = JSON.stringify(dataListClone);
+        localStorage.setItem("ElectronicItemsList", dataInStr);
 
         setEditData(null);
         setModalVisibility(false);
@@ -94,8 +103,12 @@ const ItemList = () => {
                                 placeholder="Edit Value"
                                 value={updateValue}
                                 onChange={(e) => setUpdateValue(e.target.value)}
+                                disabled={authorizedUser.email != editData.data.userId}
                             />
-                            <button onClick={updateHandler}>
+                            <button
+                                onClick={updateHandler}
+                                disabled={authorizedUser.email != editData.data.userId}
+                            >
                                 Update
                             </button>
 

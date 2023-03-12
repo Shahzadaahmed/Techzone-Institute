@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { Nav, NavItem, NavLink } from 'reactstrap';
 
 const Navigation = (props) => {
-    console.log("Props of navigation: ", props);
+    // console.log("Props of navigation: ", props);
     let { userStatus } = props;
 
     // Note: Handeling states here...!

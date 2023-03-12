@@ -4,7 +4,19 @@
     box-sizing: border-box;
 }
 
-.slider-images {
+.container {
+    background: linear-gradient(to right, #E75788, #6F42C1);
+}
+
+.container h1 {
+    color: white;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+    padding-bottom: 1%;
+}
+
+.slide-image {
     height: 50vh;
-    width: 70vw;
+    width: 50%;
+    border-radius: 5px;
 }

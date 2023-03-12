@@ -1,60 +1,59 @@
-// Note: Slider component...!
+// Note: ImageSlider Component...!
 
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
+import Img1 from "../../images/cartoon_1.jpg";
+import Img2 from "../../images/cartoon_2.jpg";
+import Img3 from "../../images/cartoon_3.jpg";
+import Img4 from "../../images/cartoon_4.jpg";
+import Img5 from "../../images/cartoon_5.jpg";
+
 import "./slider.css";
 
-// Note: Importing images...!
-import Img_1 from "../../images/cartoon_1.jpg";
-import Img_2 from "../../images/cartoon_2.jpg";
-import Img_3 from "../../images/cartoon_3.jpg";
-import Img_4 from "../../images/cartoon_4.jpg";
-import Img_5 from "../../images/cartoon_5.jpg";
-
-const Slider = () => {
+const ImageSlider = () => {
 
     // Note: Handeling states here...!
-    const [sliderData, setSliderData] = useState([
-        Img_1,
-        Img_2,
-        Img_3,
-        Img_4,
-        Img_5
+    const [slides, setSlides] = useState([
+        Img1,
+        Img2,
+        Img3,
+        Img4,
+        Img5
     ]);
-    const [sliderIndex, setSliderIndex] = useState(0);
+    const [startingIndex, setStartingIndex] = useState(0);
 
     // Note: Slider handler...!
     const sliderHandler = () => {
         setTimeout(() => {
-            let sliderIndexClone = sliderIndex;
-            sliderIndexClone = sliderIndexClone + 1;
-            setSliderIndex(sliderIndexClone);
+            let initialPoint = startingIndex;
+            initialPoint = initialPoint + 1;
+            setStartingIndex(initialPoint);
 
-            if (sliderIndexClone == sliderData.length) {
-                sliderIndexClone = 0;
-                setSliderIndex(sliderIndexClone);
-            }
+            if (initialPoint == slides.length) {
+                initialPoint = 0;
+                setStartingIndex(initialPoint);
+            };
         }, 2000);
     };
 
-    // Note: Mounted hook...!
+    // Note: Component mounted hook...!
     useEffect(() => {
         sliderHandler();
-    }, [sliderIndex]);
+    }, [startingIndex]);
 
     return (
-        <>
-            <div>
-                <h1> Image Slider in React JS </h1>
+        <Fragment>
+            <div className='container'>
+                <h1> Image Slider React JS </h1>
 
                 <img
-                    src={sliderData[sliderIndex]}
-                    alt={'Slider Image'}
-                    title={'Slider Image'}
-                    className="slider-images"
+                    src={slides[startingIndex]}
+                    alt={slides[startingIndex]}
+                    title={slides[startingIndex]}
+                    className="slide-image"
                 />
             </div>
-        </>
+        </Fragment>
     );
 };
 
-export default Slider;
+export default ImageSlider;

@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.ta-container {
+    /* background: linear-gradient(to right, #E75788, #6F42C1); */
+    background-color: black;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text {
+    font-family: 'Times New Roman', Times, serif;
+    /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
+    font-size: 300px;
+    font-style: italic;
+    filter: blur(0px);
+    text-shadow: 0 0 10px none;
+}

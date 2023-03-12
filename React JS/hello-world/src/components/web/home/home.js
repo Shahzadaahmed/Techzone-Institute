@@ -1,6 +1,7 @@
 // Note: Home component...!
 
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import "./home.css";
 
 const Home = () => {

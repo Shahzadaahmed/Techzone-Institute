@@ -14,6 +14,7 @@ import SignUpScreen from './components/sign-up/signup';
 import Home from './components/home/home';
 import ItemList from './components/item-list/item-list';
 import MyItems from './components/my-items/my-items';
+import ApiTesting from './components/api-tesing/api-testin';
 
 const AppRoutes = () => {
 
@@ -35,7 +36,7 @@ const AppRoutes = () => {
     };
   }, []);
 
-  useEffect(() => console.log(authUser), [authUser]);
+  // useEffect(() => console.log(authUser), [authUser]);
 
   return (
     <>
@@ -55,7 +56,8 @@ const AppRoutes = () => {
             :
             (
               <Routes>
-                <Route path='/' element={<LogInScreen />} />
+              <Route path='/' element={<ApiTesting />} />
+                <Route path='/login' element={<LogInScreen />} />
                 <Route path='sign-up-screen' element={<SignUpScreen />} />
               </Routes>
             )
